@@ -1,0 +1,186 @@
+/* Tasks Page Styles */
+
+.task-box {
+    max-width: 700px;
+    margin: 40px auto;
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-glow);
+    animation: fadeIn 0.6s ease;
+}
+
+.task-box h2 {
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Task Form */
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.task-form input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.task-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.task-form input[type="text"]::placeholder {
+    color: var(--text-muted);
+}
+
+.task-form .btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    width: auto;
+}
+
+/* Task Table */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.task-table th,
+.task-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.task-table th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.task-table tbody tr {
+    transition: var(--transition);
+}
+
+.task-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Task Status Badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.badge.to-do {
+    background-color: #ffc107;
+}
+
+.badge.in-progress {
+    background-color: #17a2b8;
+}
+
+.badge.done {
+    background-color: #28a745;
+}
+
+.badge.pending {
+    background-color: #ffc107;
+}
+
+.badge.working {
+    background-color: #17a2b8;
+}
+
+/* Buttons */
+.btn-small {
+    font-size: 12px;
+    padding: 6px 12px;
+    border: none;
+    background-color: #6c767d;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-small:hover {
+    background-color: #495057;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(108, 118, 125, 0.4);
+}
+
+.btn-clear {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    margin-bottom: 20px;
+}
+
+.btn-clear:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+}
+
+/* Empty State */
+.task-box p {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px 20px;
+    font-size: 16px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

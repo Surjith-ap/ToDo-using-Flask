@@ -1,6 +1,82 @@
 {% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<p>Registrations on the way....</p>
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Create Account 🚀</h2>
+    <p class="auth-subtitle">Join us and start managing your tasks!</p>
+    
+    <form method="POST" action="" novalidate>
+      {{ form.hidden_tag() }}  <!-- CSRF Token -->
+      
+      <!-- Username Field -->
+      <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username(class="form-control") }}
+        {% if form.username.errors %}
+          <div class="error-messages">
+            {% for error in form.username.errors %}
+              <span class="error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        {{ form.email.label }}
+        {{ form.email(class="form-control") }}
+        {% if form.email.errors %}
+          <div class="error-messages">
+            {% for error in form.email.errors %}
+              <span class="error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        {{ form.password.label }}
+        {{ form.password(class="form-control") }}
+        {% if form.password.errors %}
+          <div class="error-messages">
+            {% for error in form.password.errors %}
+              <span class="error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="form-group">
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="form-control") }}
+        {% if form.confirm_password.errors %}
+          <div class="error-messages">
+            {% for error in form.confirm_password.errors %}
+              <span class="error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        {{ form.submit(class="btn btn-primary btn-block") }}
+      </div>
+    </form>
+
+    <p class="auth-link">
+      Already have an account? 
+      <a href="{{ url_for('auth.login') }}">Login here</a>
+    </p>
+  </div>
+</div>
 {% endblock %}
