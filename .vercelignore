@@ -1,15 +1,13 @@
-# Vercel ignore file
 venv/
+env/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
 instance/
 .env
-.vscode/
-.git/
+.env.local
 *.db
 *.sqlite
-*.sqlite3
+.git/
+.vscode/
+.idea/
+README.md
