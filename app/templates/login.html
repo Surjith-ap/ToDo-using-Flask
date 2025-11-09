@@ -76,6 +76,14 @@
     transform: translateY(-2px);
   }
 
+  /* Error styling */
+  .error {
+    color: #ff5252;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
   /* Subtle fade animation */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(15px); }
@@ -86,17 +94,29 @@
 <div class="login-box">
   <h2>Welcome Back 👋</h2>
   <form method="POST" autocomplete="off">
+    {{ form.hidden_tag() }}  <!-- CSRF TOKEN - CRITICAL! -->
+    
     <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username" placeholder="Enter your username" required>
+      {{ form.username.label }}
+      {{ form.username(placeholder="Enter your username") }}
+      {% if form.username.errors %}
+        {% for error in form.username.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
     </div>
 
     <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" placeholder="Enter your password" required>
+      {{ form.password.label }}
+      {{ form.password(placeholder="Enter your password") }}
+      {% if form.password.errors %}
+        {% for error in form.password.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+      {% endif %}
     </div>
 
-    <button type="submit" class="btn">Login</button>
+    {{ form.submit(class="btn") }}
   </form>
 </div>
 {% endblock %}

@@ -30,8 +30,6 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        session.clear()
-
         flash(f'Account created for {form.username.data}! Please login.', 'success')
         return redirect(url_for('auth.login'))
 
@@ -42,27 +40,45 @@ def register():
 def login():
     """Login route using WTForms"""
     
+    print(f"\n=== LOGIN DEBUG ===")
+    print(f"Method: {request.method}")
+    print(f"Is authenticated: {current_user.is_authenticated}")
+    
     # If user is already logged in, redirect to tasks
     if current_user.is_authenticated:
         return redirect(url_for('tasks.view_tasks'))
     
     form = LoginForm()
     
+    print(f"Form validate_on_submit: {form.validate_on_submit()}")
+    print(f"Form errors: {form.errors}")
+    
     # Validate form on submit
     if form.validate_on_submit():
+        print(f"✅ Form validated!")
+        print(f"Username: {form.username.data}")
+        
         # Find user in database
         user = User.query.filter_by(username=form.username.data).first()
+        print(f"User found: {user}")
 
         # Check if user exists and password is correct
         if user and user.check_password(form.password.data):
-            login_user(user)  # Log the user in
+            print(f"✅ Password correct! Logging in...")
+            login_user(user, remember=True)  # Log the user in with remember
             flash(f'Welcome back, {user.username}!', 'success')
             
             # Redirect to next page or tasks
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('tasks.view_tasks'))
         else:
+            print(f"❌ Invalid credentials")
             flash('Invalid username or password. Please try again.', 'danger')
+    else:
+        print(f"❌ Form validation failed!")
+        if request.method == 'POST':
+            print(f"POST data: {request.form}")
+            flash('Please check the form and try again.', 'danger')
 
     return render_template('login.html', form=form)
 

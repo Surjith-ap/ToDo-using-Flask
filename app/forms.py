@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, EmailField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
-from app.models import User
 
 class RegistrationForm(FlaskForm):
     """Registration form with validation"""
@@ -32,15 +31,17 @@ class RegistrationForm(FlaskForm):
     
     submit = SubmitField('Register')
     
-    # Custom validators
+    # Custom validators - import User inside to avoid circular import
     def validate_username(self, username):
         """Check if username already exists"""
+        from app.models import User
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Username already exists. Please choose a different one.')
     
     def validate_email(self, email):
         """Check if email already exists"""
+        from app.models import User
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email already registered. Please use a different one.')
