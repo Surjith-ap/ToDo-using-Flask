@@ -1,11 +1,11 @@
-/* Tasks Page Styles */
+/* Tasks Page Styles - Mobile First */
 
 .task-box {
     max-width: 700px;
-    margin: 40px auto;
+    margin: 20px auto;
     background: var(--bg-glass);
     backdrop-filter: blur(10px);
-    padding: 25px;
+    padding: 15px;
     border-radius: var(--radius);
     box-shadow: var(--shadow-glow);
     animation: fadeIn 0.6s ease;
@@ -15,24 +15,39 @@
     color: var(--accent);
     margin-bottom: 20px;
     text-align: center;
+    font-size: 1.4rem;
 }
 
-/* Task Form */
+/* Desktop Task Box */
+@media (min-width: 768px) {
+    .task-box {
+        margin: 40px auto;
+        padding: 25px;
+    }
+
+    .task-box h2 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Task Form - Mobile First, Stack Vertically */
 .task-form {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 12px;
     margin-bottom: 25px;
 }
 
 .task-form input[type="text"] {
     flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    padding: 14px 12px;
+    font-size: 16px; /* Prevent auto-zoom on iOS */
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.05);
     color: var(--text-light);
     border-radius: 8px;
     transition: var(--transition);
+    min-height: 44px; /* Touch-friendly */
 }
 
 .task-form input[type="text"]:focus {
@@ -46,23 +61,48 @@
 }
 
 .task-form .btn {
-    padding: 12px 20px;
+    padding: 14px 20px;
     font-size: 16px;
-    width: auto;
+    width: 100%; /* Full width on mobile */
+    min-height: 44px; /* Touch-friendly */
+}
+
+/* Desktop Task Form - Horizontal Layout */
+@media (min-width: 768px) {
+    .task-form {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .task-form input[type="text"] {
+        padding: 12px;
+    }
+
+    .task-form .btn {
+        width: auto;
+    }
+}
+
+/* Task Table Wrapper - Enable horizontal scroll on mobile */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-top: 20px;
 }
 
 /* Task Table */
 .task-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    min-width: 500px; /* Ensures table has minimum width for readability */
 }
 
 .task-table th,
 .task-table td {
     text-align: left;
-    padding: 12px;
+    padding: 10px 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
 }
 
 .task-table th {
@@ -70,7 +110,8 @@
     color: var(--accent);
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 0.8rem;
+    white-space: nowrap;
 }
 
 .task-table tbody tr {
@@ -81,15 +122,29 @@
     background: rgba(255, 255, 255, 0.03);
 }
 
-/* Task Status Badges */
+/* Desktop Table - More padding */
+@media (min-width: 768px) {
+    .task-table th,
+    .task-table td {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .task-table th {
+        font-size: 0.875rem;
+    }
+}
+
+/* Task Status Badges - Mobile Friendly */
 .badge {
-    padding: 5px 10px;
+    padding: 5px 8px;
     border-radius: 6px;
     font-weight: bold;
     color: white;
     text-transform: capitalize;
-    font-size: 12px;
+    font-size: 0.75rem;
     display: inline-block;
+    white-space: nowrap;
 }
 
 .badge.to-do {
@@ -112,65 +167,127 @@
     background-color: #17a2b8;
 }
 
-/* Buttons */
+/* Desktop Badges */
+@media (min-width: 768px) {
+    .badge {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Buttons - Touch-Friendly */
 .btn-small {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 0.8rem;
+    padding: 8px 12px;
     border: none;
     background-color: #6c767d;
     color: white;
     border-radius: 6px;
     cursor: pointer;
     transition: var(--transition);
+    min-height: 36px; /* Touch-friendly */
+    display: inline-block;
 }
 
-.btn-small:hover {
+.btn-small:hover,
+.btn-small:focus {
     background-color: #495057;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(108, 118, 125, 0.4);
+    outline: 2px solid #495057;
+    outline-offset: 2px;
+}
+
+.btn-small:active {
+    transform: translateY(0);
 }
 
 .btn-clear {
     background: linear-gradient(135deg, #dc3545, #c82333);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     transition: var(--transition);
     margin-bottom: 20px;
+    width: 100%; /* Full width on mobile */
+    min-height: 44px; /* Touch-friendly */
+    font-size: 16px;
 }
 
-.btn-clear:hover {
+.btn-clear:hover,
+.btn-clear:focus {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    outline: 2px solid #dc3545;
+    outline-offset: 2px;
+}
+
+.btn-clear:active {
+    transform: translateY(0);
+}
+
+/* Desktop Clear Button */
+@media (min-width: 768px) {
+    .btn-clear {
+        width: auto;
+        padding: 10px 20px;
+    }
 }
 
 .btn-delete {
     background-color: #dc3545;
     color: white;
-    padding: 6px 12px;
-    font-size: 14px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
     border-radius: 6px;
     text-decoration: none;
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    min-height: 36px; /* Touch-friendly */
+    display: inline-block;
 }
 
-.btn-delete:hover {
+.btn-delete:hover,
+.btn-delete:focus {
     background-color: #c82333;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+    outline: 2px solid #c82333;
+    outline-offset: 2px;
+}
+
+.btn-delete:active {
+    transform: translateY(0);
+}
+
+/* Desktop Delete Button */
+@media (min-width: 768px) {
+    .btn-small,
+    .btn-delete {
+        font-size: 0.875rem;
+        padding: 6px 12px;
+    }
 }
 
 /* Empty State */
 .task-box p {
     text-align: center;
     color: var(--text-muted);
-    padding: 40px 20px;
-    font-size: 16px;
+    padding: 30px 15px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Desktop Empty State */
+@media (min-width: 768px) {
+    .task-box p {
+        padding: 40px 20px;
+        font-size: 1rem;
+    }
 }
 
 /* Animation */
@@ -182,5 +299,23 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Mobile Scroll Hint - Show user table is scrollable */
+.table-wrapper::after {
+    content: '← Scroll for more →';
+    display: block;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 8px 0;
+    font-style: italic;
+}
+
+/* Hide scroll hint on desktop */
+@media (min-width: 768px) {
+    .table-wrapper::after {
+        display: none;
     }
 }

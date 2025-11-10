@@ -1,10 +1,10 @@
 /* ===============================================
-   BASE STYLES - Common across all pages
+   BASE STYLES - Mobile-First, Common across all pages
    =============================================== */
 
 /* CSS Variables */
 :root {
-  --bg-dark: #0d1117;
+  --bg-dark: #0d1221;
   --bg-glass: rgba(255, 255, 255, 0.05);
   --accent: #00bcd4;
   --text-light: #f1f1f1;
@@ -22,7 +22,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Body */
+/* Body - Mobile First */
 body {
   margin: 0;
   background: radial-gradient(circle at top left, #0b1221, #000000);
@@ -30,17 +30,20 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  line-height: 1.6;
 }
 
-/* Container */
+/* Container - Responsive */
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 15px;
+  width: 100%;
 }
 
 /* ===============================================
-   HEADER & NAVIGATION
+   HEADER & NAVIGATION - Mobile First
    =============================================== */
 
 header {
@@ -50,13 +53,16 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
+  border-bottom: 1px solid rgba(0, 188, 212, 0.2);
 }
 
 header .container {
-  padding: 1rem 2rem;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 h1 {
@@ -64,12 +70,14 @@ h1 {
   color: var(--accent);
   letter-spacing: 1px;
   margin: 0;
+  font-size: 1.4rem; /* Mobile friendly */
 }
 
 nav {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -77,33 +85,77 @@ nav a {
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: inline-block;
+  min-height: 44px; /* Touch-friendly */
+  line-height: 24px;
+  font-size: 0.95rem;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:focus {
   color: var(--accent);
   text-shadow: 0 0 8px var(--accent);
+  background: rgba(0, 188, 212, 0.1);
+  outline: none;
 }
 
 .welcome-user {
   color: var(--accent);
   font-weight: 600;
-  margin-right: 10px;
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+
+/* Desktop Navigation */
+@media (min-width: 768px) {
+  header .container {
+    padding: 1rem 2rem;
+    flex-wrap: nowrap;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  nav {
+    gap: 15px;
+  }
+
+  nav a {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+
+  .welcome-user {
+    margin-right: 10px;
+    font-size: 1rem;
+  }
 }
 
 /* ===============================================
-   MAIN CONTENT
+   MAIN CONTENT - Mobile First
    =============================================== */
 
 main.container {
   flex: 1;
   max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1rem auto;
+  padding: 1rem;
   background: var(--bg-glass);
   border-radius: var(--radius);
   box-shadow: var(--shadow-glow);
   backdrop-filter: blur(10px);
   animation: fadeIn 0.6s ease;
+}
+
+/* Desktop Main */
+@media (min-width: 768px) {
+  main.container {
+    margin: 2rem auto;
+    padding: 2rem;
+  }
 }
 
 /* ===============================================
@@ -168,24 +220,41 @@ footer {
 }
 
 /* ===============================================
-   BUTTONS - Common button styles
+   BUTTONS - Mobile First, Touch-Friendly
    =============================================== */
 
 .btn {
   background: linear-gradient(135deg, var(--accent), #0097a7);
   color: white;
   border: none;
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 14px 20px;
+  font-size: 16px; /* Prevent auto-zoom on iOS */
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   transition: var(--transition);
+  min-height: 44px; /* Touch-friendly */
+  display: inline-block;
+  text-align: center;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Desktop Buttons */
+@media (min-width: 768px) {
+  .btn {
+    padding: 12px 24px;
+  }
 }
 
 /* ===============================================
